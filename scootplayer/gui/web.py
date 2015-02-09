@@ -5,10 +5,12 @@ import flot
 import pprint
 import ConfigParser
 import yaml
+import glob
 
 app = Flask(__name__)
 report = { 'playback': {}, 'download': {} }
 graphing_data = { 'playback': {}, 'download': {} }
+info = {}
 
 @app.route('/')
 def homepage():
@@ -61,6 +63,27 @@ def parse_config():
 
 config = parse_config()
 graphs_to_display = get_graphs_to_display(config)
+
+# def open_info():
+#     global info
+#     files = glob.glob('out/*/info.csv')
+#     with open(files[0], 'r') as file_:
+#         for line in file_:
+#             split = line.split(',')
+#             info[split[0]] = split[1]
+
+# class get_info_thread(threading.Thread):
+#     def __init__(self):
+#         threading.Thread.__init__(self)
+
+#     def run(self):
+#         time.sleep(7)
+#         print 'printing'
+#         open_info()
+#         print 'printing'
+
+# get_thread = get_info_thread()
+# get_thread.start()
 
 class webserver_thread(threading.Thread):
     def __init__(self):

@@ -17,7 +17,7 @@ function request_graphing_data(buffer) {
                         if (val == 0)
                             return 0
                         else
-                            return (val / 1000000).toFixed(axis.tickDecimals) + "mb";
+                            return (val / 1000).toFixed(axis.tickDecimals);
                     }
                 }
             }
@@ -26,7 +26,6 @@ function request_graphing_data(buffer) {
     });
 
 }
-
 function plot_graphs() {
     request_graphing_data('playback');
     request_graphing_data('download');
