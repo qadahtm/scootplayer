@@ -16,42 +16,35 @@
             <div class="buffer">
                 <h2 class="buffer_title" onclick="toggle_playback_graphs()">Playback</h2>
                 <div class="row buffer_graphs"  id="playback_graphs">
-                    <div class="col-sm-6 card col-md-4">
-                        <h3 class="title">Bandwidth</h3>
-                        <div class="body">
-                            <div class="rotate">Bandwidth (mbps)</div>
-                            <div class="graph" id="playback-bandwidth"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 card col-md-4">
-                        <h3 class="title">Video Bitrate</h3>
-                        <div class="body">
-                            <div class="rotate">Bitrate of video</div>
-                            <div class="graph" id="playback-url_bitrate"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 card col-md-4">
-                        <h3 class="title">Time Buffer</h3>
-                        <div class="body">
-                            <div class="rotate">Buffered content (seconds)</div>
-                            <div class="graph" id="playback-time_buffer"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 card col-md-4">
-                        <h3 class="title">Moving Average Bandwidth</h3>
-                        <div class="body">
-                        <div class="rotate">Bandwidth (mb/s)</div>
-                            <div class="graph" id="playback-moving_average_bandwidth"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 card col-md-4">
-                        <h3 class="title">Moving Average Occupancy</h3>
-                        <div class="body">
-                            <div class="graph" id="playback-moving_average_occupancy"></div>
-                        </div>
-                    </div>
+                    {% for element in playback %}
+                        {% if element != 'time_elapsed' %}
+                            <div class="col-sm-6 card col-md-4">
+                                <h3 class="title">{{element}}</h3>
+                                <div class="body">
+                                    <div class="graph" id=playback-{{element}}></div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
+
+            <div class="buffer">
+                <h2 class="buffer_title" onclick="toggle_download_graphs()">Download</h2>
+                <div class="row buffer_graphs" id="download_graphs">
+                    {% for element in download %}
+                        {% if element != 'time_elapsed' %}
+                            <div class="col-sm-6 card col-md-4">
+                                <h3 class="title">{{element}}</h3>
+                                <div class="body">
+                                    <div class="graph" id=download-{{element}}></div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
         </div>
 
         <script src="static/jquery.min.js"></script>
