@@ -22,6 +22,7 @@
 
 .rotate {
     -webkit-transform: rotate(-90deg);
+    -transform: rotate(-90deg);
     position: absolute;
     text-align: center;
     left: -214px;
