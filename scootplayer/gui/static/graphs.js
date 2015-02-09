@@ -1,3 +1,5 @@
+var info = {}
+
 function request_graphing_data(buffer) {
     if($('#' + buffer + '_graphs').is(':hidden')) {
         return;
@@ -26,9 +28,37 @@ function request_graphing_data(buffer) {
     });
 
 }
+
 function plot_graphs() {
     request_graphing_data('playback');
     request_graphing_data('download');
 }
+
+function get_sys_info() {
+    $.ajax({
+        url: '/sys'
+    }).done(function(data) {
+        alert(JSON.stringify(data))
+        if ($.isEmptyObject(data)) {
+            return
+        }
+        info = data
+        draw_info()
+    }).always(function() {
+        if ($.isEmptyObject(info)) {
+            alert('setting timeout')
+            setTimeout(get_sys_info, 3000);
+        }
+    });
+}
+
+function draw_info() {
+    var length = 25;
+    for (var key in info) {
+        $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length));
+    }
+}
+
+get_sys_info()
 
 var interval = setInterval(plot_graphs, 1000);

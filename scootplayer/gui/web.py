@@ -18,6 +18,8 @@ def homepage():
 
 @app.route('/<buffer_>')
 def return_graphing_data(buffer_):
+    if (buffer_ == 'sys'):
+        return jsonify(info)
     return jsonify(graphing_data[buffer_])
 
 @app.route('/<buffer_>/<metric>')
@@ -64,26 +66,24 @@ def parse_config():
 config = parse_config()
 graphs_to_display = get_graphs_to_display(config)
 
-# def open_info():
-#     global info
-#     files = glob.glob('out/*/info.csv')
-#     with open(files[0], 'r') as file_:
-#         for line in file_:
-#             split = line.split(',')
-#             info[split[0]] = split[1]
+def open_info():
+    global info
+    files = glob.glob('out/*/info.csv')
+    with open(files[0], 'r') as file_:
+        for line in file_:
+            split = line.split(',')
+            info[split[0]] = split[1]
 
-# class get_info_thread(threading.Thread):
-#     def __init__(self):
-#         threading.Thread.__init__(self)
+class get_info_thread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
 
-#     def run(self):
-#         time.sleep(7)
-#         print 'printing'
-#         open_info()
-#         print 'printing'
+    def run(self):
+        time.sleep(7)
+        open_info()
 
-# get_thread = get_info_thread()
-# get_thread.start()
+get_thread = get_info_thread()
+get_thread.start()
 
 class webserver_thread(threading.Thread):
     def __init__(self):
