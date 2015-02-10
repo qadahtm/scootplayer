@@ -56,13 +56,14 @@ function draw_info() {
         } else if (key == 'system node' || key == 'manifest') {
             $("#" + key.replace(/ /g, '_')).text(info[key]);
         } else if (key == 'min_bitrate') {
-            $("#min_max").prepend(info[key] + 'kbps');
+            var string1 = info[key] + 'kbps';
         } else if (key == 'max_bitrate') {
-            $("#min_max").append(" / " + info[key] + 'kbps');
+            var string2 = " / " + info[key] + 'kbps';
         } else {
             $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length));
         }       
     }
+    $("#min_max").text(string1.concat(string2))
 }
 
 get_sys_info()
