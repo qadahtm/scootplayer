@@ -74,6 +74,18 @@ def open_info():
             split = line.split(',')
             info[split[0]] = split[1]
 
+    files = glob.glob('out/*/stats/playback.csv')
+    print '-'*72
+    print str(files[0])
+    with open(files[0], 'r') as file_:
+        for line in file_:
+            if "startup" in line:
+                print '\n\n\nfound startup\n\n\n'
+                split = line.split(',')
+                info[split[0]] = split[1]
+    print str(info)
+    print '-'*72
+
 class get_info_thread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)

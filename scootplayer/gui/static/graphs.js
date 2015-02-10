@@ -55,7 +55,11 @@ function get_sys_info() {
 function draw_info() {
     var length = 25;
     for (var key in info) {
-        $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length));
+        if (key == 'startup_delay') {
+            $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length) + ' seconds');
+        } else {
+            $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length));
+        }        
     }
 }
 
