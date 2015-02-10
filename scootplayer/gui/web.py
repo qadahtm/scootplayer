@@ -20,7 +20,10 @@ def homepage():
 def return_graphing_data(buffer_):
     if (buffer_ == 'sys'):
         global info
-        info['min_bitrate'] = min(report['playback']['url_bitrate'])
+        minny = min(report['playback']['url_bitrate'])
+        if minny == 0:
+            minny = 50
+        info['min_bitrate'] = minny
         info['max_bitrate'] = max(report['playback']['url_bitrate'])
         return jsonify(info)
     return jsonify(graphing_data[buffer_])
