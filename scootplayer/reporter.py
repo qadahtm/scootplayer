@@ -79,11 +79,12 @@ class Reporter(object):
     def stop(self):
         """Stop reporting and close file handles."""
         self.run = False
-        self._stats()
+        if not self.player.options.live:
+            self._stats()
         for _, obj in self.managed_files.items():
             try:
                 getattr(obj, 'close')()
-            except AttributeError:
+            except (AttributeError, IOError):
                 pass
         self.player.event('stop', 'reporter')
 
@@ -110,6 +111,7 @@ class Reporter(object):
 
         If CSV file is new, append headers to first row.
 
+
         """
         self.player.start_timed_thread(self.player.options.reporting_period,
                                        self.reporter)
@@ -119,6 +121,8 @@ class Reporter(object):
                 if self.csv_new:
                     self._csv_setup()
                 self.csv_report()
+                if self.player.options.live:
+                    self._stats()
 
     def _stats(self):
         """Retrieve statistics and print them to file."""
@@ -126,13 +130,16 @@ class Reporter(object):
         stats = self.player.retrieve_metric('stats', func='calculate_stats')
         for name, dict_ in stats.iteritems():
             for key, value in dict_.iteritems():
-                self.managed_files['stats_' + name].write(
-                    str(key) +
-                    ',' +
-                    str(value) +
-                    '\n')
-        self.managed_files['stats_playback'].write(
-            'startup_delay,' + str(self.startup_delay) + '\n')
+                try:
+                    self.managed_files['stats_' + name].write(
+                        str(key) + ',' + str(value) + '\n')
+                except (IOError, ValueError):
+                    pass
+        try:
+            self.managed_files['stats_playback'].write(
+                'startup_delay,' + str(self.startup_delay) + '\n')
+        except (IOError, ValueError):
+            pass
 
     def _make_csv_from_list(self, list_, time_=True):
         """
