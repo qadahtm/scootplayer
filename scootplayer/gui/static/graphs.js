@@ -38,7 +38,6 @@ function get_sys_info() {
     $.ajax({
         url: '/sys'
     }).done(function(data) {
-        alert(JSON.stringify(data))
         if ($.isEmptyObject(data)) {
             return
         }
@@ -46,7 +45,6 @@ function get_sys_info() {
         draw_info()
     }).always(function() {
         if ($.isEmptyObject(info)) {
-            alert('setting timeout')
             setTimeout(get_sys_info, 3000);
         }
     });
