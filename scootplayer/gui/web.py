@@ -98,6 +98,7 @@ get_thread = get_info_thread()
 get_thread.start()
 
 class webserver_thread(threading.Thread):
+    daemon = True
     def __init__(self):
         threading.Thread.__init__(self)
 
