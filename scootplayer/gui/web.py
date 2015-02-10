@@ -103,7 +103,7 @@ class webserver_thread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        app.run()
+        app.run(host='0.0.0.0')
 
 webserver = webserver_thread()
 webserver.start()
