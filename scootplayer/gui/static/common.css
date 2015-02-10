@@ -13,6 +13,7 @@
     height: 18em;
     padding: 13px;
     padding-left: 30px;
+    padding-bottom: 20px;
 }
 
 .card .body .title2 {
@@ -36,6 +37,12 @@
     color: #545454;
     height: 20px;
     width: 500px;
+}
+
+.xaxis {
+    font-size: 0.85em;
+    text-align: center;
+    color: #545454;
 }
 
 body {
