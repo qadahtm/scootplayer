@@ -19,6 +19,9 @@ def homepage():
 @app.route('/<buffer_>')
 def return_graphing_data(buffer_):
     if (buffer_ == 'sys'):
+        global info
+        info['min_bitrate'] = min(report['playback']['url_bitrate'])
+        info['max_bitrate'] = max(report['playback']['url_bitrate'])
         return jsonify(info)
     return jsonify(graphing_data[buffer_])
 

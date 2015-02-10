@@ -42,7 +42,6 @@ function get_sys_info() {
             return
         }
         info = data
-        alert(JSON.stringify(info))
         draw_info()
     }).always(function() {
         if ($.isEmptyObject(info)) {
@@ -56,9 +55,12 @@ function draw_info() {
     for (var key in info) {
         if (key == 'startup_delay') {
             $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length) + ' seconds');
-        } 
-        else if (key == 'system node' || key == 'manifest') {
+        } else if (key == 'system node' || key == 'manifest') {
             $("#" + key.replace(/ /g, '_')).text(info[key]);
+        } else if (key == 'min_bitrate') {
+            $("#min_max").prepend(info[key] + 'kbps');
+        } else if (key == 'max_bitrate') {
+            $("#min_max").append(" / " + info[key] + 'kbps');
         } else {
             $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length));
         }       
