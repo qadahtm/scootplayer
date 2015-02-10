@@ -18,12 +18,16 @@
 
 .card .body .title2 {
     font-weight: bold;
-    line-height: 160%;
+    line-height: 150%;
 }
 
 .card .body .graph {
     height: 100%;
     width: 100%;
+}
+
+#manifest, #system_node {
+    word-wrap: break-word;
 }
 
 .rotate {

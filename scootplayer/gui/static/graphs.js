@@ -42,6 +42,7 @@ function get_sys_info() {
             return
         }
         info = data
+        alert(JSON.stringify(info))
         draw_info()
     }).always(function() {
         if ($.isEmptyObject(info)) {
@@ -56,8 +57,8 @@ function draw_info() {
         if (key == 'startup_delay') {
             $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length) + ' seconds');
         } 
-        else if (key == 'system_node') {
-            $("#" + key.replace(/ /g, '_')).text(info[key].substring(20, 50));
+        else if (key == 'system node' || key == 'manifest') {
+            $("#" + key.replace(/ /g, '_')).text(info[key]);
         } else {
             $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length));
         }       
