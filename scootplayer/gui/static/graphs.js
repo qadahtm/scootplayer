@@ -44,9 +44,7 @@ function get_sys_info() {
         info = data
         draw_info()
     }).always(function() {
-        if ($.isEmptyObject(info)) {
-            setTimeout(get_sys_info, 3000);
-        }
+        setTimeout(get_sys_info, 3000);
     });
 }
 
