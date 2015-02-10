@@ -55,9 +55,12 @@ function draw_info() {
     for (var key in info) {
         if (key == 'startup_delay') {
             $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length) + ' seconds');
+        } 
+        else if (key == 'system_node' {
+            $("#" + key.replace(/ /g, '_')).text(info[key].substring(20, 50));
         } else {
             $("#" + key.replace(/ /g, '_')).text(info[key].substring(0, length));
-        }        
+        }       
     }
 }
 

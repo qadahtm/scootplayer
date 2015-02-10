@@ -19,7 +19,7 @@
                     <div class="col-sm-6 card col-md-4">
                         <h3 class="title">Bandwidth</h3>
                         <div class="body">
-                            <div class="rotate">Bandwidth (Kbp/s)</div>
+                            <div class="rotate">Bandwidth (Kbps)</div>
                             <div class="graph" id="playback-bandwidth"></div>
                             <div class="xaxis">Seconds</div>
                         </div>
@@ -27,8 +27,9 @@
                     <div class="col-sm-6 card col-md-4">
                         <h3 class="title">Video Bitrate</h3>
                         <div class="body">
-                            <div class="rotate">Bitrate of video</div>
+                            <div class="rotate">Bitrate of video (Kbps)</div>
                             <div class="graph" id="playback-url_bitrate"></div>
+                            <div class="xaxis">Seconds</div>
                         </div>
                     </div>
                     <div class="col-sm-6 card col-md-4">
@@ -36,20 +37,23 @@
                         <div class="body">
                             <div class="rotate">Buffered content (seconds)</div>
                             <div class="graph" id="playback-time_buffer"></div>
+                            <div class="xaxis">Seconds</div>
                         </div>
                     </div>
                     <div class="col-sm-6 card col-md-4">
                         <h3 class="title">Moving Average Bandwidth</h3>
                         <div class="body">
-                            <div class="rotate">Bandwidth (Kbp/s)</div>
+                            <div class="rotate">Bandwidth (Kbps)</div>
                             <div class="graph" id="playback-moving_average_bandwidth"></div>
+                            <div class="xaxis">Seconds</div>
                         </div>
                     </div>
                     <div class="col-sm-6 card col-md-4">
                         <h3 class="title">Moving Average Occupancy</h3>
                         <div class="body">
-                            <div class="rotate">Replace</div>
+                            <div class="rotate">Buffered content (seconds)</div>
                             <div class="graph" id="playback-moving_average_occupancy"></div>
+                            <div class="xaxis">Seconds</div>
                         </div>
                     </div>
                     <div class="col-sm-6 card col-md-4">
@@ -57,10 +61,10 @@
                         <div class="body">
                             <span class="title2">Local Time:</span> <span id="local_time"></span><br/>
                             <span class="title2">Startup delay</span> <span style="color: red" id="startup_delay"> seconds</span><br/>
+                            <span class="title2">System:</span> <span id="system_node"></span><br/>
                             <span class="title2">Manifest:</span> <span id="manifest"></span><br/>
                             <span class="title2">Python version:</span> <span id="python_version"></span><br/>
                             <span class="title2">System machine:</span> <span id="system_machine"></span><br/>
-                            <span class="title2">System node:</span> <span id="system_node"></span><br/>
                             <span class="title2">System platform:</span> <span id="system_platform"></span><br/>
                             <span class="title2">System Processor:</span> <span id="system_processor"></span><br/>
                             <span class="title2">System release:</span> <span id="system_release"></span><br/>
