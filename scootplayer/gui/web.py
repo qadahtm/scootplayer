@@ -6,6 +6,7 @@ import pprint
 import ConfigParser
 import yaml
 import glob
+import os
 
 app = Flask(__name__)
 report = { 'playback': {}, 'download': {} }
@@ -74,16 +75,14 @@ graphs_to_display = get_graphs_to_display(config)
 
 def open_info():
     global info
-    files = glob.glob('out/*/info.csv')
-    with open(files[0], 'r') as file_:
+    directory = 'out/' + str(max(get_immediate_subdirectories('out/')) + '/')
+    with open(directory + 'info.csv', 'r') as file_:
         for line in file_:
             split = line.split(',')
             info[split[0]] = split[1]
 
-    files = glob.glob('out/*/stats/playback.csv')
     print '-'*72
-    print str(files[0])
-    with open(files[0], 'r') as file_:
+    with open(directory + 'stats/playback.csv', 'r') as file_:
         for line in file_:
             if "startup" in line:
                 print '\n\n\nfound startup\n\n\n'
@@ -91,6 +90,11 @@ def open_info():
                 info[split[0]] = split[1]
     print str(info)
     print '-'*72
+
+def get_immediate_subdirectories(a_dir):
+        return [name for name in os.listdir(a_dir)
+                            if os.path.isdir(os.path.join(a_dir, name))]
+
 
 class get_info_thread(threading.Thread):
     def __init__(self):
